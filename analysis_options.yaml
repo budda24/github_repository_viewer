@@ -30,7 +30,6 @@ analyzer:
 linter:
   rules:
     - use_key_in_widget_constructors: false
-    - prefer_relative_imports
     - avoid_dynamic_calls
     - avoid_empty_else
     - avoid_print
