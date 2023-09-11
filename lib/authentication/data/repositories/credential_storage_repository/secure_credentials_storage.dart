@@ -31,7 +31,6 @@ class SecureCredentialsStorage implements CredentialsStorage {
   @override
   Future<void> save(Credentials credentials) {
     _cachedCredentials = credentials;
-
     return _storage.write(
       key: _key,
       value: credentials.toJson(),
@@ -41,7 +40,6 @@ class SecureCredentialsStorage implements CredentialsStorage {
   @override
   Future<void> clear() {
     _cachedCredentials = null;
-
     return _storage.delete(key: _key);
   }
 }

@@ -9,10 +9,6 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit(this._authenticator) : super(const AuthenticationState.initial());
 
   final GithubAuthenticationRepository _authenticator;
-  @override
-  void onChange(Change<AuthenticationState> change) {
-    super.onChange(change);
-  }
 
   Future<void> checkAndUpdateAuthStatus() async {
     emit(

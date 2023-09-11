@@ -25,28 +25,28 @@ class GithubAuthenticationRepository {
 
   GithubAuthenticationRepository(this.credentialsStorage, this._dio);
 
-  static const clientId = '48fce3b303fb5b4c3b96';
-  static const clientSecret = '6b574df6553f0e656291465e14430322840989f1';
-  static const scopes = ['read:user', 'repo'];
-  static final authorizationEndpoint = Uri.parse('https://github.com/login/oauth/authorize');
-  static final tokenEndpoint = Uri.parse('https://github.com/login/oauth/access_token');
+  static const _clientId = '48fce3b303fb5b4c3b96';
+  static const _clientSecret = '6b574df6553f0e656291465e14430322840989f1';
+  static const _scopes = ['read:user', 'repo'];
+  static final Uri _authorizationEndpoint = Uri.parse('https://github.com/login/oauth/authorize');
+  static final _tokenEndpoint = Uri.parse('https://github.com/login/oauth/access_token');
+  static final _revokedEndpoint = Uri.parse('https://api.github.com/applications/$_clientId/token');
   static final redirectUrl = Uri.parse('http://localhost:3000/callback');
-  static final revokedEndpoint = Uri.parse('https://api.github.com/applications/$clientId/token');
 
   Future<bool> isSignIn() => credentialsStorage.read().then((credentials) => credentials != null);
 
   AuthorizationCodeGrant createGrant() {
     return AuthorizationCodeGrant(
-      clientId,
-      authorizationEndpoint,
-      tokenEndpoint,
-      secret: clientSecret,
+      _clientId,
+      _authorizationEndpoint,
+      _tokenEndpoint,
+      secret: _clientSecret,
       httpClient: GithubOAuthHttpClient(),
     );
   }
 
   Uri getAuthorizationUrl(AuthorizationCodeGrant grant) {
-    return grant.getAuthorizationUrl(redirectUrl, scopes: scopes);
+    return grant.getAuthorizationUrl(redirectUrl, scopes: _scopes);
   }
 
   Future<Either<AuthFailure, Unit>> handleAuthorization(
@@ -72,12 +72,12 @@ class GithubAuthenticationRepository {
     try {
       final accessToken = await credentialsStorage.read().then((credentials) => credentials?.accessToken);
 
-      final clientIdAndSecret = utf8.fuse(base64).encode('$clientId:$clientSecret');
+      final clientIdAndSecret = utf8.fuse(base64).encode('$_clientId:$_clientSecret');
 
       try {
         // ignore: inference_failure_on_function_invocation
         await _dio.deleteUri(
-          revokedEndpoint,
+          _revokedEndpoint,
           data: {'access_token': accessToken},
           options: Options(
             headers: {'Authorization': 'basic $clientIdAndSecret'},
