@@ -6,8 +6,21 @@ import 'package:repository_search/authentication/presentation/manager/authentica
 import 'package:repository_search/core/routes/app_routes.dart';
 
 @RoutePage()
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.scheduleFrameCallback((timeStamp) async {
+      await context.read<AuthenticationCubit>().checkAndUpdateAuthStatus();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(

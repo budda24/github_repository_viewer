@@ -18,6 +18,11 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     );
   }
 
+  @override
+  void onChange(Change<AuthenticationState> change) {
+    super.onChange(change);
+  }
+
   Future<void> signIn(AuthUriCallback authorizationCallback) async {
     final grant = _authenticator.createGrant();
     final responseUri = await authorizationCallback(_authenticator.getAuthorizationUrl(grant));

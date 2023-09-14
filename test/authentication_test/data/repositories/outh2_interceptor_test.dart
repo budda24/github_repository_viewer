@@ -13,14 +13,15 @@ void main() {
   late MockGithubAuthenticationRepository mockGithubAuthenticationRepository;
   late AuthenticationCubit authenticationCubit;
   late MockCredentialsStorage mockCredentialsStorage;
-  late Dio dio;
   setUp(() {
-    dio = Dio();
     mockCredentialsStorage = MockCredentialsStorage();
 
     authenticationCubit = MockAuthenticationCubit();
     mockGithubAuthenticationRepository = MockGithubAuthenticationRepository();
-    oAuth2Interceptor = OAuth2Interceptor(mockGithubAuthenticationRepository, authenticationCubit, dio);
+    oAuth2Interceptor = OAuth2Interceptor(
+      mockGithubAuthenticationRepository,
+      authenticationCubit,
+    );
   });
 
   test('on request should call credential storage read', () {
