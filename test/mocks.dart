@@ -6,11 +6,15 @@ import 'package:repository_search/authentication/data/repositories/credential_st
 import 'package:repository_search/authentication/domain/repositories/github_authentication_repository.dart';
 import 'package:repository_search/authentication/presentation/manager/authentication/authentication_cubit.dart';
 import 'package:repository_search/authentication/presentation/manager/authentication/authentication_state.dart';
+import 'package:repository_search/repository_search/data/repositories/github_headers_cache.dart';
+import 'package:repository_search/repository_search/domain/repositories/search_repository.dart';
 
 @GenerateNiceMocks(
   [
     MockSpec<GithubAuthenticationRepository>(),
     MockSpec<CredentialsStorage>(),
+    MockSpec<GithubHeadersCache>(),
+    MockSpec<SearchedRepoRepository>(),
   ],
 )
 class _Mocks {}

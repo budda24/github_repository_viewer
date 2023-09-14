@@ -5,7 +5,7 @@ import 'package:repository_search/authentication/presentation/pages/authorizatio
 import 'package:repository_search/authentication/presentation/pages/sign_in_page.dart';
 import 'package:repository_search/home_screen.dart';
 import 'package:repository_search/repository_search/presentation/pages/searched_repos_page.dart';
-import 'package:repository_search/splash_screen/splash_page.dart';
+import 'package:repository_search/splash_screen/presentation/splash_page.dart';
 
 part 'app_routes.gr.dart';
 

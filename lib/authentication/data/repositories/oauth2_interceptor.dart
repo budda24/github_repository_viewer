@@ -5,9 +5,8 @@ import 'package:repository_search/authentication/presentation/manager/authentica
 class OAuth2Interceptor extends Interceptor {
   final GithubAuthenticationRepository _authenticator;
   final AuthenticationCubit _authCubit;
-  final Dio _dio;
 
-  OAuth2Interceptor(this._authenticator, this._authCubit, this._dio);
+  OAuth2Interceptor(this._authenticator, this._authCubit);
 
   @override
   Future<void> onRequest(
@@ -30,20 +29,8 @@ class OAuth2Interceptor extends Interceptor {
     ErrorInterceptorHandler handler,
   ) async {
     final errorResponse = err.response;
-
     if (errorResponse != null && errorResponse.statusCode == 401) {
-      await _authenticator.clearCredentialsStorage();
-      await _authCubit.checkAndUpdateAuthStatus();
-
-      final storedCredentials = await _authenticator.credentialsStorage.read();
-
-      if (storedCredentials != null) {
-        handler.resolve(
-          await _dio.fetch(
-            errorResponse.requestOptions..headers['Authorization'] = 'bearer ${storedCredentials.accessToken}',
-          ),
-        );
-      }
+      await _authCubit.signOut();
     } else {
       handler.next(err);
     }
