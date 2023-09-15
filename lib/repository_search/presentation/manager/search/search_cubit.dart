@@ -14,11 +14,6 @@ class SearchCubit extends Cubit<SearchState> {
           SearchState.initial(Fresh.yes([])),
         );
 
-  @override
-  void onChange(Change<SearchState> change) {
-    super.onChange(change);
-  }
-
   @visibleForTesting
   int page = 1;
   TextEditingController searchController = TextEditingController();

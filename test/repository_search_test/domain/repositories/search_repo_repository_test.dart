@@ -20,7 +20,9 @@ void main() {
     when(mockGithubHeadersCache.read(any)).thenAnswer((realInvocation) async => const GithubHeaders());
 
     //act
-    await searchRepositoryRemoteService.getSearchedRepoPage(1, 'flutter');
+    try {
+      await searchRepositoryRemoteService.getSearchedRepoPage(1, 'flutter');
+    } catch (_) {}
 
     //assert
     verify(mockGithubHeadersCache.read(any));

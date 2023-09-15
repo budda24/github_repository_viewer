@@ -32,6 +32,7 @@ dependencies:
   flutter_animated_dialog: ^2.0.1
   loading_indicator: ^3.1.1
   flutter_screenutil: ^5.9.0
+  url_launcher: ^6.1.14
   flutter_test:
     sdk: flutter
 
@@ -48,6 +49,7 @@ dev_dependencies:
   bloc_test: ^9.1.4
   http_mock_adapter: ^0.6.0
   json_serializable: ^6.7.1
+  network_image_mock: ^2.1.1
 
 
 

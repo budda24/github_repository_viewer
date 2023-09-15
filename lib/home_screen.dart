@@ -49,13 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
           orElse: () => null,
           authenticated: (_) {
             return context.routing.push(
-              SearchedReposRoute(searchedRepoName: 'online_tribes_app'),
+              const SearchedReposRoute(),
               /*predicate: (route) => false,*/
             );
           },
           unauthenticated: (_) {
             return context.routing.push(
-              const SignInRoute(),
+              SignInRoute(),
               /*predicate: (route) => false,*/
             );
           },

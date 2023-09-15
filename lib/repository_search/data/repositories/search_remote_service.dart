@@ -1,5 +1,5 @@
 import 'package:repository_search/authentication/data/models/remote_response.dart';
-import 'package:repository_search/repository_search/data/models/github_repo_dto.dart';
+import 'package:repository_search/core/models/github_repo_dto.dart';
 import 'package:repository_search/repository_search/data/models/pagination_config.dart';
 import 'package:repository_search/repository_search/domain/repositories/repo_remote_repository.dart';
 
@@ -23,6 +23,7 @@ class SearchRepositoryRemoteService extends RepositoryRemoteService {
           'per_page': PaginationConfig.itemsPerPage.toString(),
         },
       ),
+
       // ignore: avoid_dynamic_calls
       jsonDataSelector: (json) => json['items'] as List<dynamic>,
     );

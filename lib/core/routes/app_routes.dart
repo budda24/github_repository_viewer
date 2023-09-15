@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 
 import 'package:flutter/material.dart';
+import 'package:repository_search/authentication/presentation/manager/authentication/authentication_cubit.dart';
 import 'package:repository_search/authentication/presentation/pages/authorization_page.dart';
 import 'package:repository_search/authentication/presentation/pages/sign_in_page.dart';
 import 'package:repository_search/home_screen.dart';
+import 'package:repository_search/repository_detail/presentation/pages/detail_screen.dart';
+import 'package:repository_search/repository_search/domain/entities/github_repo.dart';
 import 'package:repository_search/repository_search/presentation/pages/searched_repos_page.dart';
 import 'package:repository_search/splash_screen/presentation/splash_page.dart';
 
@@ -18,5 +21,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: SignInRoute.page),
         AutoRoute(page: AuthorizationRoute.page),
         AutoRoute(page: SearchedReposRoute.page),
+        AutoRoute(page: DetailRoute.page),
       ];
 }

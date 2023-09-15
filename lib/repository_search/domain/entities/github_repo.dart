@@ -10,7 +10,11 @@ class GithubRepo with _$GithubRepo {
     required String name,
     required int stargazersCount,
     required String description,
+    required String language,
+    required String url,
+    required int watchersCount,
   }) = _StarredRepo;
+
   const GithubRepo._();
 
   String get fullName => '${owner.name}/$name';
