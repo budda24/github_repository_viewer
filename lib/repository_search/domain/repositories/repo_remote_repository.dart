@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:repository_search/authentication/data/models/network_exceptions.dart';
 import 'package:repository_search/authentication/data/models/remote_response.dart';
 import 'package:repository_search/authentication/domain/utils/dio_extensions.dart';
+import 'package:repository_search/core/models/github_repo_dto.dart';
 import 'package:repository_search/repository_search/data/models/github_headers.dart';
-import 'package:repository_search/repository_search/data/models/github_repo_dto.dart';
 import 'package:repository_search/repository_search/data/repositories/github_headers_cache.dart';
 
 abstract class RepositoryRemoteService {

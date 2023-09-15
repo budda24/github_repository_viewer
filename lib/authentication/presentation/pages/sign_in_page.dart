@@ -7,7 +7,10 @@ import 'package:repository_search/core/routes/app_routes.dart';
 
 @RoutePage()
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+  const SignInScreen({this.authenticationCubit, super.key});
+
+  @visibleForTesting
+  final AuthenticationCubit? authenticationCubit;
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -17,7 +20,9 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.scheduleFrameCallback((timeStamp) async {
-      await context.read<AuthenticationCubit>().checkAndUpdateAuthStatus();
+      /* final authCubit =
+          widget.authenticationCubit ?? context.read<AuthenticationCubit>();
+      await authCubit.checkAndUpdateAuthStatus();*/
     });
     super.initState();
   }

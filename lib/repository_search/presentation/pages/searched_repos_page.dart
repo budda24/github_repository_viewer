@@ -7,26 +7,18 @@ import 'package:repository_search/repository_search/presentation/widgets/custom_
 import 'package:repository_search/repository_search/presentation/widgets/paginated_repos_list_view.dart';
 
 @RoutePage()
-class SearchedReposScreen extends StatefulWidget {
-  final String searchedRepoName;
+class SearchedReposScreen extends StatelessWidget {
+  @visibleForTesting
+  final SearchCubit? searchCubit;
 
   const SearchedReposScreen({
-    required this.searchedRepoName,
     super.key,
+    this.searchCubit,
   });
 
   @override
-  State<SearchedReposScreen> createState() => _SearchedReposPageState();
-}
-
-class _SearchedReposPageState extends State<SearchedReposScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final cubit = searchCubit ?? context.read<SearchCubit>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -40,12 +32,12 @@ class _SearchedReposPageState extends State<SearchedReposScreen> {
                 SizedBox(
                   width: 0.85.sw,
                   child: CustomSearchBar(
-                    context.read<SearchCubit>().searchController,
+                    cubit.searchController,
                     hint: 'Type in searched text',
                   ),
                 ),
                 InkWell(
-                  onTap: () => context.read<SearchCubit>().search(),
+                  onTap: cubit.search,
                   child: Icon(
                     Icons.search,
                     size: 50.w,
@@ -56,8 +48,9 @@ class _SearchedReposPageState extends State<SearchedReposScreen> {
             SizedBox(
               height: 0.8.sh,
               child: RepositoryListView(
+                searchCubit: searchCubit,
                 getNextPage: (context) {
-                  context.read<SearchCubit>().getNextPage();
+                  cubit.getNextPage();
                 },
               ),
             ),

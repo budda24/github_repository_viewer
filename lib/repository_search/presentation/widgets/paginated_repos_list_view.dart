@@ -10,10 +10,12 @@ import 'package:repository_search/repository_search/presentation/widgets/repo_ti
 
 class RepositoryListView extends StatefulWidget {
   final void Function(BuildContext context) getNextPage;
+  final SearchCubit? searchCubit;
 
   const RepositoryListView({
     required this.getNextPage,
     super.key,
+    this.searchCubit,
   });
 
   @override
@@ -32,6 +34,7 @@ class _RepositoryListViewState extends State<RepositoryListView> {
   Widget build(
     BuildContext context,
   ) {
+    final cubit = widget.searchCubit;
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         final metrics = notification.metrics;
@@ -47,6 +50,7 @@ class _RepositoryListViewState extends State<RepositoryListView> {
         return false;
       },
       child: BlocListener<SearchCubit, SearchState>(
+        bloc: cubit,
         listener: (context, state) {
           state.map(
             initial: (_) {
