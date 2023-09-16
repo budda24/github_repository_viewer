@@ -1,9 +1,11 @@
-import 'package:repository_search/authentication/data/models/remote_response.dart';
-import 'package:repository_search/core/models/github_repo_dto.dart';
-import 'package:repository_search/repository_search/data/models/pagination_config.dart';
-import 'package:repository_search/repository_search/domain/repositories/repo_remote_repository.dart';
+// ignore_for_file: avoid_dynamic_calls
 
-class SearchRepositoryRemoteService extends RepositoryRemoteService {
+import 'package:repository_search/authentication/data/models/remote_response.dart';
+import 'package:repository_search/core/models/data/github_repo_dto.dart';
+import 'package:repository_search/core/repositories/repo_remote_repository.dart';
+import 'package:repository_search/repository_search/data/models/pagination_config.dart';
+
+class SearchRepositoryRemoteService extends RepositoryRemoteService<GithubRepoDTO> {
   SearchRepositoryRemoteService(
     super.dio,
     super.headersCache,
@@ -23,9 +25,8 @@ class SearchRepositoryRemoteService extends RepositoryRemoteService {
           'per_page': PaginationConfig.itemsPerPage.toString(),
         },
       ),
-
-      // ignore: avoid_dynamic_calls
-      jsonDataSelector: (json) => json['items'] as List<dynamic>,
+      dataConverter: (json) =>
+          (json['items'] as List<dynamic>).map((e) => GithubRepoDTO.fromJson(e as Map<String, dynamic>)).toList(),
     );
   }
 }

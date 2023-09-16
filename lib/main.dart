@@ -8,6 +8,8 @@ import 'package:repository_search/authentication/data/repositories/oauth2_interc
 import 'package:repository_search/authentication/domain/repositories/github_authentication_repository.dart';
 import 'package:repository_search/authentication/presentation/manager/authentication/authentication_cubit.dart';
 import 'package:repository_search/core/routes/app_routes.dart';
+import 'package:repository_search/repository_issues/domain/repositories/isssue_repository.dart';
+import 'package:repository_search/repository_issues/presentation/manager/issues_cubit.dart';
 import 'package:repository_search/repository_search/data/repositories/github_headers_cache.dart';
 import 'package:repository_search/repository_search/domain/repositories/search_repository.dart';
 import 'package:repository_search/repository_search/presentation/manager/search/search_cubit.dart';
@@ -27,6 +29,12 @@ void main() {
           create: (context) => GithubAuthenticationRepository(
             SecureCredentialsStorage(const FlutterSecureStorage()),
             context.read<Dio>(),
+          ),
+        ),
+        RepositoryProvider<IssueRepository>(
+          create: (context) => IssueRepository(
+            context.read<Dio>(),
+            GithubHeadersCache(context.read<SembastDatabase>()),
           ),
         ),
         BlocProvider(
@@ -51,6 +59,9 @@ void main() {
             ),
           ),
           lazy: false,
+        ),
+        BlocProvider(
+          create: (context) => IssuesCubit(context.read<IssueRepository>()),
         ),
       ],
       child: MaterialApp.router(

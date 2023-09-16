@@ -20,9 +20,8 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.scheduleFrameCallback((timeStamp) async {
-      /* final authCubit =
-          widget.authenticationCubit ?? context.read<AuthenticationCubit>();
-      await authCubit.checkAndUpdateAuthStatus();*/
+      final authCubit = widget.authenticationCubit ?? context.read<AuthenticationCubit>();
+      await authCubit.checkAndUpdateAuthStatus();
     });
     super.initState();
   }
