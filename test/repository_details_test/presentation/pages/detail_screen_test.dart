@@ -32,6 +32,9 @@ void main() {
 
     await widgetTester.pumpDeviceBuilder(builder);
 
-    await screenMatchesGolden(widgetTester, 'detail_screen');
+    await screenMatchesGolden(
+      widgetTester,
+      'detail_screen',
+    );
   });
 }
