@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +16,13 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 2), () {
-      context.router.popAndPush(
-        const HomeRoute(),
-      );
-    });
+    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+      Timer(const Duration(seconds: 2), () {
+        context.router.popAndPush(
+          const HomeRoute(),
+        );
+      });
+    }
     super.initState();
   }
 

@@ -10,11 +10,9 @@ import 'package:repository_search/repository_search/presentation/manager/search/
 import 'package:repository_search/repository_search/presentation/pages/searched_repos_page.dart';
 
 void main() {
-  /*late MockGithubAuthenticationRepository mockGithubAuthenticationRepository;*/
   late MockSearchCubit mockSearchCubit;
 
   setUp(() {
-    /* mockGithubAuthenticationRepository = MockGithubAuthenticationRepository();*/
     mockSearchCubit = MockSearchCubit();
   });
   testGoldens('it should render $SignInScreen noting found yet', (widgetTester) async {

@@ -29,7 +29,8 @@ class SearchedReposScreen extends StatelessWidget {
             ),
             Row(
               children: [
-                SizedBox(
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
                   width: 0.85.sw,
                   child: CustomSearchBar(
                     cubit.searchController,

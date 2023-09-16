@@ -1,12 +1,14 @@
+// ignore_for_file: unused_import
+
 import 'package:dio/dio.dart';
 import 'package:repository_search/authentication/data/models/network_exceptions.dart';
 import 'package:repository_search/authentication/data/models/remote_response.dart';
 import 'package:repository_search/authentication/domain/utils/dio_extensions.dart';
-import 'package:repository_search/core/models/github_repo_dto.dart';
+import 'package:repository_search/core/models/data/github_repo_dto.dart';
 import 'package:repository_search/repository_search/data/models/github_headers.dart';
 import 'package:repository_search/repository_search/data/repositories/github_headers_cache.dart';
 
-abstract class RepositoryRemoteService {
+abstract class RepositoryRemoteService<T> {
   final Dio _dio;
   final GithubHeadersCache _headersCache;
 
@@ -15,9 +17,9 @@ abstract class RepositoryRemoteService {
     this._headersCache,
   );
 
-  Future<RemoteResponse<List<GithubRepoDTO>>> getPage({
+  Future<RemoteResponse<List<T>>> getPage({
     required Uri requestUrl,
-    required List<dynamic> Function(dynamic json) jsonDataSelector,
+    required List<dynamic> Function(dynamic json) dataConverter,
   }) async {
     final previousHeaders = await _headersCache.read(requestUrl);
     try {
@@ -39,10 +41,9 @@ abstract class RepositoryRemoteService {
           headers,
         );
 
-        final convertedData =
-            jsonDataSelector(response.data).map((e) => GithubRepoDTO.fromJson(e as Map<String, dynamic>)).toList();
+        final convertedData = dataConverter(response.data) as List<T>;
 
-        return RemoteResponse.witchNewData(
+        return RemoteResponse<List<T>>.witchNewData(
           convertedData,
           maxPage: headers.link?.maxPage ?? 1,
         );

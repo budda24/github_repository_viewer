@@ -1,7 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:repository_search/repository_search/domain/entities/user.dart';
+import 'package:repository_search/core/models/domain/user.dart';
 
 part 'user_dto.freezed.dart';
 part 'user_dto.g.dart';

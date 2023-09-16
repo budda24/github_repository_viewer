@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_indicator/loading_indicator.dart';
+import 'package:repository_search/core/widgets/loading_indicator.dart';
 import 'package:repository_search/repository_search/presentation/manager/search/search_cubit.dart';
 import 'package:repository_search/repository_search/presentation/manager/search/search_state.dart';
 import 'package:repository_search/repository_search/presentation/pages/empty_repo_page.dart';
@@ -63,13 +63,7 @@ class _RepositoryListViewState extends State<RepositoryListView> {
             loadingInProgress: (state) {
               canLoadNextPage = false;
               setState(() {
-                _body = const LoadingIndicator(
-                  indicatorType: Indicator.ballPulse,
-                  colors: [Colors.black],
-                  strokeWidth: 2,
-                  backgroundColor: Colors.white,
-                  pathBackgroundColor: Colors.black,
-                );
+                _body = const CustomLoadingIndicator();
               });
             },
             loadSuccess: (state) {

@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           orElse: () => null,
           authenticated: (_) {
             return context.routing.push(
-              const SearchedReposRoute(),
+              SearchedReposRoute(),
               /*predicate: (route) => false,*/
             );
           },
